@@ -1,29 +1,24 @@
 <div class="container">
-  
-
-  <header class="row header">
-    <div class="col-xs-12 text-center">
-     <app-header></app-header>
-    </div>
-  </header>
-  
-  <div class="row">
-    <div class="col-sm-8 first-column">
-     <app-body></app-body>
-    </div>
-    <div class="col-sm-4 second-column">
-    
-      <app-sidebar></app-sidebar>
-     
-    </div> 
-  </div>
-  <div class="row">
-    <footer>
-     <app-footer></app-footer>
-    </footer>
-  </div>
+    <header class="row bg-secondary border mt-1">
+        <app-header></app-header>
+    </header>
+      
+      <div class="row mt-1">
+        <section class="col-md-9  border bg-light">
+            <app-body></app-body>
+        </section>
+        <section class="col-md-3 border bg-light">
+          <app-sidebar></app-sidebar>
+        </section>
+      </div>
+      
+      <footer class="row mx-auto mt-1">
+       <app-footer></app-footer>
+      </footer>
+   
 </div>
 
 
 
-<router-outlet></router-outlet>
+
+

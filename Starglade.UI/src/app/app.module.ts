@@ -7,6 +7,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BodyComponent } from './components/body/body.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BlogListComponent } from './components/blog-list/blog-list.component';
+import { BlogSummaryComponent } from './components/blog-summary/blog-summary.component';
+import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     HeaderComponent,
     FooterComponent,
     BodyComponent,
-    SidebarComponent
+    SidebarComponent,
+    BlogListComponent,
+    BlogSummaryComponent,
+    BlogDetailsComponent
   ],
   imports: [
     BrowserModule,
