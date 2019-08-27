@@ -2,3 +2,12 @@
 /Starglade.UI/obj
 /Starglade.UI/package-lock.json
 /Starglade.UI/src/tsconfig.json
+/Starglade.Web/bin
+/Starglade.Data/obj
+/Starglade.Data/bin
+/Starglade.Core/obj
+/Starglade.Core/bin
+/Starglade.Common/obj
+/Starglade.Common/bin
+/.vs
+/Starglade.Web/obj

@@ -10,6 +10,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { BlogSummaryComponent } from './components/blog-summary/blog-summary.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BlogDetailsComponent } from './components/blog-details/blog-details.com
     SidebarComponent,
     BlogListComponent,
     BlogSummaryComponent,
-    BlogDetailsComponent
+    BlogDetailsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
