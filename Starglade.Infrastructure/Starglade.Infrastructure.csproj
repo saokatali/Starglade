@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Starglade.Common\Starglade.Common.csproj" />
+    <ProjectReference Include="..\Starglade.Core\Starglade.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Cache\" />
   </ItemGroup>
 
 </Project>

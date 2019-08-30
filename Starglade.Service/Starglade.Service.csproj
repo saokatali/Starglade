@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Events\" />
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\Starglade.Core\Starglade.Core.csproj" />
+    <ProjectReference Include="..\Starglade.Infrastructure\Starglade.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -11,3 +11,7 @@
 /Starglade.Common/bin
 /.vs
 /Starglade.Web/obj
+/Starglade.Infrastructure/bin
+/Starglade.Infrastructure/obj
+/Starglade.Service/bin
+/Starglade.Service/obj
