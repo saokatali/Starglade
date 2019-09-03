@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Starglade.Core.Models;
 using Starglade.Infrastructure.Data;
+using Starglade.Core.Interfaces;
 
 namespace Starglade.Web
 {
@@ -29,6 +30,7 @@ namespace Starglade.Web
             services.AddOptions();
             services.Configure<AppSettings>(Configuration);
             services.AddDbContext<StargladeDbContext>();
+            services.AddScoped(typeof(IDbRepository<>),typeof(DbContextRepository<>));
 
 
 
