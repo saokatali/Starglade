@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Starglade.Core.Models;
 using Starglade.Infrastructure.Data;
 using Starglade.Core.Interfaces;
+using Starglade.Web.Extensions;
 
 namespace Starglade.Web
 {
@@ -31,6 +32,8 @@ namespace Starglade.Web
             services.Configure<AppSettings>(Configuration);
             services.AddDbContext<StargladeDbContext>();
             services.AddScoped(typeof(IDbRepository<>),typeof(DbContextRepository<>));
+            services.AddStargladeServices();
+
 
 
 
@@ -45,6 +48,8 @@ namespace Starglade.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

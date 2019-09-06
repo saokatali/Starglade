@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Starglade.Core.Interfaces
+namespace Starglade.Service.Services
 {
-    public interface IService
+    public class StargladeService
     {
     }
 }
