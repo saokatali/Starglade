@@ -19,6 +19,8 @@ namespace Starglade.Infrastructure.Data
 
         }
 
+
+        #region methods
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -29,11 +31,11 @@ namespace Starglade.Infrastructure.Data
         {
             ChangeTracker.DetectChanges();
 
-            foreach (var entity in ChangeTracker.Entries<StargladeEntity>())
+            foreach (var entity in ChangeTracker.Entries())
             {
                 if(entity.State == EntityState.Added || entity.State == EntityState.Deleted || entity.State == EntityState.Deleted)
                 {
-                    entity.Entity.LastUpdate = DateTime.UtcNow;
+                    (entity.Entity as StargladeEntity).LastUpdate = DateTime.UtcNow;
 
                     if(entity.State == EntityState.Deleted)
                     {
@@ -46,5 +48,28 @@ namespace Starglade.Infrastructure.Data
 
             return base.SaveChangesAsync(cancellationToken);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PostCategory>().HasKey(e => new { e.PostId, e.CategoryId });
+            modelBuilder.Entity<PostTag>().HasKey(e => new { e.PostId, e.TagId });
+           // modelBuilder.Entity<StargladeEntity>().HasQueryFilter(e => !e.IsDeleted);
+            base.OnModelCreating(modelBuilder);
+        }
+
+        #endregion 
+
+        #region entities
+
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
+        #endregion
+
+
     }
 }

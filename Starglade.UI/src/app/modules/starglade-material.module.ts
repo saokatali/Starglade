@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list'; 
+
+
 
 
 
@@ -9,6 +12,6 @@ import { MatButtonModule} from '@angular/material/button';
   imports: [
     MatButtonModule
   ],
-  exports:[MatButtonModule]
+  exports: [MatButtonModule, MatGridListModule]
 })
 export class StargladeMaterialModule { }

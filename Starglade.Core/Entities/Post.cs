@@ -18,7 +18,11 @@ namespace Starglade.Core.Entities
 
         public DateTime PublishedOn { get; set; }
 
+        public IList<Comment> Comments { get; set; }
 
+        public IList<PostCategory> Categories { get; set; }
+
+        public IList<PostTag> Tags { get; set; }
 
     }
 }

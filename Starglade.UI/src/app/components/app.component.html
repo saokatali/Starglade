@@ -1,22 +1,28 @@
-<div class="container">
-    <header class="row bg-secondary border mt-1">
-        <app-header></app-header>
-    </header>
+<mat-grid-list cols="4" rowHeight="100px">
+
+    <mat-grid-tile colspan="4" >
+            <app-header></app-header>
+    </mat-grid-tile>
+    
       
-      <div class="row mt-1">
-        <section class="col-md-9  border bg-light">
+    <mat-grid-tile colspan="3" >
             <app-body></app-body>
-        </section>
-        <section class="col-md-3 border bg-light">
+    </mat-grid-tile>
+        
+    <mat-grid-tile colspan="1" >
           <app-sidebar></app-sidebar>
-        </section>
-      </div>
-      
-      <footer class="row mx-auto mt-1">
+    </mat-grid-tile>
+       
+    <mat-grid-tile colspan="4" >    
        <app-footer></app-footer>
-      </footer>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
+
+    
    
-</div>
+
 
 
 
