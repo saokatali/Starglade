@@ -13,6 +13,9 @@ using Starglade.Core.Models;
 using Starglade.Infrastructure.Data;
 using Starglade.Core.Interfaces;
 using Starglade.Web.Extensions;
+using Microsoft.Extensions.Logging;
+using Starglade.Infrastructure.Log;
+
 
 namespace Starglade.Web
 {
@@ -30,10 +33,13 @@ namespace Starglade.Web
         {
             services.AddOptions();
             services.Configure<AppSettings>(Configuration);
-            services.AddDbContext<StargladeDbContext>();
+            services.AddDbContext<StargladeDbContext>();           
             services.AddScoped(typeof(IDbRepository<>),typeof(DbContextRepository<>));
-            services.AddStargladeServices();
+            services.AddMongo();
+            services.AddScoped(typeof(IDbRepository<>), typeof(MongoDbRepository<>));
 
+            services.AddStargladeServices();
+           
 
 
 
@@ -52,8 +58,10 @@ namespace Starglade.Web
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddProvider(new MongoDBLoggerProvider());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

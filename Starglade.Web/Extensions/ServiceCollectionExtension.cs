@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Starglade.Service.Services;
+using Starglade.Infrastructure.Data;
 
 namespace Starglade.Web.Extensions
 {
@@ -24,6 +25,11 @@ namespace Starglade.Web.Extensions
             }
 
 
+        }
+
+        public static void AddMongo(this IServiceCollection services)
+        {
+            services.AddSingleton(typeof(MonoDBContext));
         }
 
     }

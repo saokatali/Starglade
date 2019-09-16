@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Starglade.Core.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Starglade.Web.Controllers.Api
 {
@@ -16,6 +17,7 @@ namespace Starglade.Web.Controllers.Api
 
         public PostController(IPostService postService)
         {
+            
             this.postService = postService;
         }
 

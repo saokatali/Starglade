@@ -8,6 +8,10 @@ namespace Starglade.Core.Models
     {
         public ConnectionStrings ConnectionStrings { get; set; }
 
+        public MongoDBSettings MongoDB { get; set; }
+
+        public Logging Logging { get; set; }
+
 
 
     }
@@ -15,5 +19,22 @@ namespace Starglade.Core.Models
     public class ConnectionStrings
     {
         public string Db { get; set; }
+
+      
     }
+
+    public class Logging
+    {
+        public string Provider { get; set; }
+        public bool IsEnabled { get; set; }
+    }
+
+    public class MongoDBSettings
+    {
+        public string ConnectionStrings { get; set; }
+
+        public string Db { get; set; }
+    }
+
+
 }
