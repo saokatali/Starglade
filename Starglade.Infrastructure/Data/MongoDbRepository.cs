@@ -9,7 +9,7 @@ using Pluralize.NET.Core;
 
 namespace Starglade.Infrastructure.Data
 {
-    public class MongoDbRepository<T> : IDbRepository<T> where T : class
+    public class MongoDbRepository<T> : IMongoDBRepository<T> where T : class
     {
         readonly MonoDBContext dbContext;
 
@@ -20,7 +20,7 @@ namespace Starglade.Infrastructure.Data
 
         public async Task<T> AddAsync(T entity)
         {
-            var cl = dbContext.GetDatabase().GetCollection<T>(new Pluralizer().Pluralize(nameof(T)));
+            var cl = dbContext.GetDatabase().GetCollection<T>(new Pluralizer().Pluralize(entity.GetType().Name));
             await cl.InsertOneAsync(entity);
             return entity;
         }

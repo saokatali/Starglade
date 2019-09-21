@@ -15,7 +15,7 @@ using Starglade.Core.Interfaces;
 using Starglade.Web.Extensions;
 using Microsoft.Extensions.Logging;
 using Starglade.Infrastructure.Log;
-
+using Starglade.Web.Middlewares;
 
 namespace Starglade.Web
 {
@@ -36,8 +36,8 @@ namespace Starglade.Web
             services.AddDbContext<StargladeDbContext>();           
             services.AddScoped(typeof(IDbRepository<>),typeof(DbContextRepository<>));
             services.AddMongo();
-            services.AddScoped(typeof(IDbRepository<>), typeof(MongoDbRepository<>));
-
+            services.AddSingleton(typeof(IMongoDBRepository<>), typeof(MongoDbRepository<>));
+            services.AddLogging(builder => builder.Services.AddSingleton<ILoggerProvider, MongoDBLoggerProvider>());       
             services.AddStargladeServices();
            
 
@@ -58,20 +58,17 @@ namespace Starglade.Web
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddProvider(new MongoDBLoggerProvider());
+            // loggerFactory.AddProvider(new MongoDBLoggerProvider());
 
-            if (env.IsDevelopment())
+            app.UseMiddleware<ExceptionMiddleware>();
+
+            if (!env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+           
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

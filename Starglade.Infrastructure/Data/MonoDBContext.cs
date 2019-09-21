@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using MongoDB.Driver;
+using Microsoft.Extensions.Options;
 
 namespace Starglade.Infrastructure.Data
 {
@@ -10,9 +11,9 @@ namespace Starglade.Infrastructure.Data
     {
         AppSettings appSettings;
 
-        public MonoDBContext(AppSettings appSettings)
+        public MonoDBContext(IOptionsMonitor<AppSettings> appSettings)
         {
-            this.appSettings = appSettings;
+            this.appSettings = appSettings.CurrentValue;
         }
 
         public IMongoDatabase GetDatabase()

@@ -30,7 +30,7 @@ namespace Starglade.Infrastructure.Log
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            LogEntry logEntry = new LogEntry();
+            LogEntry logEntry = new LogEntry { LogLevel = logLevel.ToString(), EventName = eventId.Name, CreatedAt = DateTime.UtcNow, Message = formatter(state,exception), StackStrace=exception?.StackTrace, Method=exception?.TargetSite.Name };
             provider.WriteEntry(logEntry);
         }
     }

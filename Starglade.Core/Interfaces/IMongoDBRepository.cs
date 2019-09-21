@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Starglade.Core.Interfaces
 {
-    public interface IDbRepository<T>:IRepository<T>
+    public interface IMongoDBRepository<T>:IRepository<T>
     {
-
     }
 }

@@ -19,7 +19,7 @@ namespace Starglade.Web.Extensions
             {
                 var baseType = type.GetInterfaces().FirstOrDefault(e=>e.Name.EndsWith("Service"));
 
-                services.AddScoped(baseType, type);
+                services.AddTransient(baseType, type);
 
 
             }
