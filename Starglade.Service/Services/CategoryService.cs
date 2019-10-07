@@ -28,29 +28,60 @@ namespace Starglade.Service.Services
             catch (Exception ex)
             {
                 logger.LogError(ex.StackTrace);
-
-                throw new Exception($"Failed to create {nameof(Category)}");
+                throw new Exception($"Failed to create {nameof(Category)}",ex);
             }
         }
 
-        public Task<bool> DeleteAsync(Category category)
+        public async Task<bool> DeleteAsync(Category category)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await dbRepository.DeleteAsync(category);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                throw new Exception($"Failed to Delete {nameof(Category)}", ex);
+            }
         }
 
-        public Task<IList<Category>> GetAllAsync()
+        public async Task<IList<Category>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await dbRepository.GetAllAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                throw new Exception($"Failed to Get All {nameof(Category)}", ex);
+            }
         }
 
-        public Task<Category> GetByIdAsync(int id)
+        public async Task<Category> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await dbRepository.GetByIdAsync(id);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                throw new Exception($"Failed to Get {nameof(Category)}", ex);
+            }
         }
 
-        public Task<int> UpdateAsync(Category category)
+        public async Task<int> UpdateAsync(Category category)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await dbRepository.UpdateAsync(category);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.StackTrace);
+                throw new Exception($"Failed to Update {nameof(Category)}", ex);
+            }
         }
     }
 }

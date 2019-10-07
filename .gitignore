@@ -16,3 +16,5 @@
 /Starglade.Service/bin
 /Starglade.Service/obj
 /Starglade.Web/Starglade.Web.csproj.user
+/Starglade.Test/bin
+/Starglade.Test/obj

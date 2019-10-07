@@ -9,9 +9,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Starglade.Web.Controllers.Api
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PostController : ControllerBase
+    
+    public class PostController : StargladeController
     {
         IPostService postService;
 

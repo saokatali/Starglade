@@ -17,10 +17,17 @@ namespace Starglade.Infrastructure.Log
             this.dbRepository = dbRepository;
         }
 
-        public override void WriteEntry(LogEntry entry)
+        public async override void WriteEntry(LogEntry entry)
         {
+            try
+            {
 
-            dbRepository.AddAsync(entry);
+                //await dbRepository.AddAsync(entry);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }

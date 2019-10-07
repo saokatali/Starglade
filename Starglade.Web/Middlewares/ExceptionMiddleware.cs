@@ -44,7 +44,7 @@ namespace Starglade.Web.Middlewares
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = env.IsDevelopment() ? exception.StackTrace: "Something went wrong"
+                Message = env.IsDevelopment() ? exception.StackTrace : exception.Message
             }.ToString());
         }
     }

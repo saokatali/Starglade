@@ -57,5 +57,15 @@ namespace Starglade.Infrastructure.Data
             dbContext.Entry(entity).State = EntityState.Modified;
             return await dbContext.SaveChangesAsync();
         }
+
+        public async Task<IList<T>> GetPagedListAsync(int pageNo, int records)
+        {
+            return await dbContext.Set<T>().OrderBy(e => e).Skip((pageNo - 1) * records).Take(records).ToListAsync();
+        }
+
+        public async Task<IList<T>> GetPagedListByConditionAsync(Expression<Func<T, bool>> condition, int pageNo, int records)
+        {
+            return await dbContext.Set<T>().Where(condition).OrderBy(e => e).Skip((pageNo - 1) * records).Take(records).ToListAsync();
+        }
     }
 }
