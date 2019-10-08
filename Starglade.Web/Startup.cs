@@ -16,6 +16,7 @@ using Starglade.Web.Extensions;
 using Microsoft.Extensions.Logging;
 using Starglade.Infrastructure.Log;
 using Starglade.Web.Middlewares;
+using Microsoft.Extensions.Hosting;
 
 namespace Starglade.Web
 {
@@ -52,13 +53,13 @@ namespace Starglade.Web
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // loggerFactory.AddProvider(new MongoDBLoggerProvider());
 
@@ -68,18 +69,22 @@ namespace Starglade.Web
             {
                 app.UseHsts();
             }
-           
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
         }
     }
 }

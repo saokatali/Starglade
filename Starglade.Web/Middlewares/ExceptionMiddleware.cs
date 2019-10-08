@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 
 namespace Starglade.Web.Middlewares
 {
@@ -14,9 +15,9 @@ namespace Starglade.Web.Middlewares
     {
         private readonly RequestDelegate next;
         private readonly ILogger<ExceptionMiddleware> logger;
-        IHostingEnvironment env;
+        IWebHostEnvironment env;
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostingEnvironment env)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, IWebHostEnvironment env)
         {
             this.logger = logger;
             this.next = next;

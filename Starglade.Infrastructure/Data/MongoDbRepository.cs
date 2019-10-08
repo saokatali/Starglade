@@ -45,6 +45,16 @@ namespace Starglade.Infrastructure.Data
             throw new NotImplementedException();
         }
 
+        public Task<IList<T>> GetPagedListAsync(int pageNo, int records)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<T>> GetPagedListByConditionAsync(Expression<Func<T, bool>> condition, int pageNo, int records)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<int> UpdateAsync(T entity)
         {
             throw new NotImplementedException();
