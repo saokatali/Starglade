@@ -17,6 +17,12 @@ using Microsoft.Extensions.Logging;
 using Starglade.Infrastructure.Log;
 using Starglade.Web.Middlewares;
 using Microsoft.Extensions.Hosting;
+using Starglade.Core.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Starglade.Web
 {
@@ -34,22 +40,36 @@ namespace Starglade.Web
         {
             services.AddOptions();
             services.Configure<AppSettings>(Configuration);
-            services.AddDbContext<StargladeDbContext>();           
-            services.AddScoped(typeof(IDbRepository<>),typeof(DbContextRepository<>));
+            services.AddDbContext<StargladeDbContext>();
+            services.AddDbContext<SecurityDbContext>();
+            services.AddScoped(typeof(IDbRepository<>), typeof(DbContextRepository<>));
             services.AddMongo();
             services.AddSingleton(typeof(IMongoDBRepository<>), typeof(MongoDbRepository<>));
-            services.AddLogging(builder => builder.Services.AddSingleton<ILoggerProvider, MongoDBLoggerProvider>());       
+            services.AddLogging(builder => builder.Services.AddSingleton<ILoggerProvider, MongoDBLoggerProvider>());
             services.AddStargladeServices();
-           
-
-
-
-
-            services.Configure<CookiePolicyOptions>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<SecurityDbContext>().AddDefaultTokenProviders();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddAuthentication(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = true;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience=false,                  
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"])),
+                    ClockSkew = TimeSpan.Zero
+
+                };
+
             });
 
 
@@ -75,6 +95,7 @@ namespace Starglade.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

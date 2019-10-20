@@ -12,6 +12,10 @@ namespace Starglade.Core.Models
 
         public Logging Logging { get; set; }
 
+        public JWT JWT { get; set; }
+
+
+
 
 
     }
@@ -34,6 +38,13 @@ namespace Starglade.Core.Models
         public string ConnectionStrings { get; set; }
 
         public string Db { get; set; }
+    }
+
+    public class JWT
+    {
+        public string SecretKey { get; set; }
+        public string Issuer { get; set; }
+        public int ExpireDays { get; set; }
     }
 
 
