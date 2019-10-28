@@ -10,10 +10,10 @@ namespace Starglade.Service.Services
 {
     public class CategoryService : ICategoryService
     {
-        IRepository<Category> dbRepository;
+        IDbRepository<Category> dbRepository;
         ILogger<Category> logger;
 
-        public CategoryService(IRepository<Category> dbRepository, ILogger<Category> logger)
+        public CategoryService(IDbRepository<Category> dbRepository, ILogger<Category> logger)
         {
             this.dbRepository = dbRepository;
             this.logger = logger;

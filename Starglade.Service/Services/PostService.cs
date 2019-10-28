@@ -11,7 +11,7 @@ namespace Starglade.Service.Services
     {
         IDbRepository<Post> dbRepository;
 
-        public PostService(Core.Interfaces.IDbRepository<Post> dbRepository)
+        public PostService(IDbRepository<Post> dbRepository)
         {
             this.dbRepository = dbRepository;
         }

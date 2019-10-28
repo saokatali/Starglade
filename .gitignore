@@ -18,3 +18,6 @@
 /Starglade.Web/Starglade.Web.csproj.user
 /Starglade.Test/bin
 /Starglade.Test/obj
+/Starglade.Api/*.user
+/Starglade.Api/bin
+/Starglade.Api/obj

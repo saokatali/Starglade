@@ -13,10 +13,7 @@ namespace Starglade.Core.Models
         public Logging Logging { get; set; }
 
         public JWT JWT { get; set; }
-
-
-
-
+        public RedisSettings Redis { get; set; }
 
     }
 
@@ -45,6 +42,14 @@ namespace Starglade.Core.Models
         public string SecretKey { get; set; }
         public string Issuer { get; set; }
         public int ExpireDays { get; set; }
+    }
+
+    public class RedisSettings
+    {
+        public string Configuration { get; set; }
+
+        public string InstanceName { get; set; }
+
     }
 
 

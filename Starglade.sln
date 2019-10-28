@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.Core", "Starglade.Core\Starglade.Core.csproj", "{94A5C2B5-48AE-4104-A5D8-FB09C60139B6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.Web", "Starglade.Web\Starglade.Web.csproj", "{14BC5495-1D2D-45D2-A58A-19C0BF5F4EC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.Api", "Starglade.Api\Starglade.Api.csproj", "{14BC5495-1D2D-45D2-A58A-19C0BF5F4EC2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.Service", "Starglade.Service\Starglade.Service.csproj", "{08866F90-7C3B-446F-A6DE-8D65381CC87F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starglade.Test", "Starglade.Test\Starglade.Test.csproj", "{DC336660-207B-4237-A805-FAB7A4CAE736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.Test", "Starglade.Test\Starglade.Test.csproj", "{DC336660-207B-4237-A805-FAB7A4CAE736}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
