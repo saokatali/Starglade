@@ -45,6 +45,11 @@ namespace Starglade.Web
             services.AddScoped(typeof(IDbRepository<>), typeof(DbContextRepository<>));
             services.AddMongo();
             services.AddSingleton(typeof(IMongoDBRepository<>), typeof(MongoDbRepository<>));
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = Configuration["Redis:Configuration"];
+                options.InstanceName = Configuration["Redis:InstanceName"];
+            });
             services.AddLogging(builder => builder.Services.AddSingleton<ILoggerProvider, MongoDBLoggerProvider>());
             services.AddStargladeServices();
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<SecurityDbContext>().AddDefaultTokenProviders();

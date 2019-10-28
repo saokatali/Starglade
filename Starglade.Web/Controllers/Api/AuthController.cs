@@ -33,6 +33,7 @@ namespace Starglade.Web.Controllers.Api
         {
             if (ModelState.IsValid)
             {
+                
                 var result = await signInManager.PasswordSignInAsync(user.Email, user.Password, false, false);
                 if (result.Succeeded)
                 {
@@ -83,9 +84,11 @@ namespace Starglade.Web.Controllers.Api
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Email, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim("userId", user.Id),
+                new Claim(JwtRegisteredClaimNames.UniqueName, email)
+
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.JWT.SecretKey));
