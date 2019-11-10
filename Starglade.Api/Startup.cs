@@ -23,6 +23,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using Starglade.Infrastructure.Cache;
+using Starglade.Api.Extensions;
+using Starglade.Infrastructure.MessageBroker;
+using Starglade.Api.HostedServices;
 
 namespace Starglade.Web
 {
@@ -50,8 +54,13 @@ namespace Starglade.Web
                 options.Configuration = Configuration["Redis:Configuration"];
                 options.InstanceName = Configuration["Redis:InstanceName"];
             });
+            services.AddSingleton<IBusClient, RabbitMQClient>();
+            services.AddSingleton(typeof(ICacheRepository), typeof(RedisRepository));
+
             services.AddLogging(builder => builder.Services.AddSingleton<ILoggerProvider, MongoDBLoggerProvider>());
+            services.AddSingleton<IBusClient, RabbitMQClient>();
             services.AddStargladeServices();
+            
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<SecurityDbContext>().AddDefaultTokenProviders();
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services.AddAuthentication(options =>
@@ -77,6 +86,7 @@ namespace Starglade.Web
 
             });
 
+            services.AddHostedService<RabbitMqListener>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
@@ -109,6 +119,8 @@ namespace Starglade.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+         
 
 
         }

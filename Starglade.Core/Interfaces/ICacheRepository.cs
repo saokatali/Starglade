@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Starglade.Core.Interfaces
 {
-    public interface ICacheRepository<T>
+    public interface ICacheRepository
     {
-        void SetAsync(string key, T value);
+        void SetAsync<T>(string key, T value);
 
-        T GetAsync(string key);
+        Task<T> GetAsync<T>(string key);
     }
 }

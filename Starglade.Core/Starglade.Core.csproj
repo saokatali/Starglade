@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.2" />
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
   </ItemGroup>

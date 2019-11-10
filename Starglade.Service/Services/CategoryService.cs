@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Starglade.Core.Constants;
 using Starglade.Core.Entities;
 using Starglade.Core.Interfaces;
 using System;
@@ -11,11 +12,13 @@ namespace Starglade.Service.Services
     public class CategoryService : ICategoryService
     {
         IDbRepository<Category> dbRepository;
+        ICacheRepository cache;
         ILogger<Category> logger;
 
-        public CategoryService(IDbRepository<Category> dbRepository, ILogger<Category> logger)
+        public CategoryService(IDbRepository<Category> dbRepository, ICacheRepository cache, ILogger<Category> logger)
         {
             this.dbRepository = dbRepository;
+            this.cache = cache;
             this.logger = logger;
         }
 
@@ -23,7 +26,9 @@ namespace Starglade.Service.Services
         {
             try
             {
-                return await dbRepository.AddAsync(category);
+                category =  await dbRepository.AddAsync(category);
+
+                return category;
             }
             catch (Exception ex)
             {
@@ -36,7 +41,9 @@ namespace Starglade.Service.Services
         {
             try
             {
-                return await dbRepository.DeleteAsync(category);
+                var result=  await dbRepository.DeleteAsync(category);
+               
+                return result;
             }
             catch (Exception ex)
             {
@@ -49,7 +56,13 @@ namespace Starglade.Service.Services
         {
             try
             {
-                return await dbRepository.GetAllAsync();
+                var data = await cache.GetAsync<IList<Category>>(CacheConstant.CATEGORY_KEY);
+                if(data == null)
+                {
+                    data = await dbRepository.GetAllAsync();
+                    cache.SetAsync(CacheConstant.CATEGORY_KEY, data);
+                }
+                return data;
             }
             catch (Exception ex)
             {
@@ -75,7 +88,9 @@ namespace Starglade.Service.Services
         {
             try
             {
-                return await dbRepository.UpdateAsync(category);
+                var result= await dbRepository.UpdateAsync(category);
+             
+                return result;
             }
             catch (Exception ex)
             {
@@ -83,5 +98,7 @@ namespace Starglade.Service.Services
                 throw new Exception($"Failed to Update {nameof(Category)}", ex);
             }
         }
+
+      
     }
 }

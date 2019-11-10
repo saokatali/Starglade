@@ -15,6 +15,8 @@ namespace Starglade.Core.Models
         public JWT JWT { get; set; }
         public RedisSettings Redis { get; set; }
 
+        public RabbitMQSettings RabbitMQ { get; set; }
+
     }
 
     public class ConnectionStrings
@@ -49,6 +51,27 @@ namespace Starglade.Core.Models
         public string Configuration { get; set; }
 
         public string InstanceName { get; set; }
+
+    }
+
+    public class RabbitMQSettings
+    {
+        public string Host { get; set; }
+
+        public int Port { get; set; }
+
+        public string VHost { get; set; }
+        public string User { get; set; }
+
+        public string Pass { get; set; }
+
+        public string Exchange { get; set; }
+
+        public string ExchangeType { get; set; }
+
+        public string Queue { get; set; }
+
+        public string RoutingKey { get; set; }
 
     }
 
