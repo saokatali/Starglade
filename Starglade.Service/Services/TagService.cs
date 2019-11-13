@@ -2,22 +2,22 @@
 using Starglade.Core.Constants;
 using Starglade.Core.Entities;
 using Starglade.Core.Interfaces;
-using Starglade.Core.Messages;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Starglade.Core.Messages;
 
 namespace Starglade.Service.Services
 {
-    public class CategoryService : ICategoryService
+    public class TagService : ITagService
     {
-        IDbRepository<Category> dbRepository;
+        IDbRepository<Tag> dbRepository;
         ICacheRepository cache;
-        ILogger<Category> logger;
+        ILogger<Tag> logger;
         IBusClient busClient;
 
-        public CategoryService(IDbRepository<Category> dbRepository, ICacheRepository cache, ILogger<Category> logger, IBusClient busClient)
+        public TagService(IDbRepository<Tag> dbRepository, ICacheRepository cache, ILogger<Tag> logger, IBusClient busClient)
         {
             this.dbRepository = dbRepository;
             this.cache = cache;
@@ -25,58 +25,58 @@ namespace Starglade.Service.Services
             this.busClient = busClient;
         }
 
-        public async Task<Category> AddAsync(Category category)
+        public async Task<Tag> AddAsync(Tag Tag)
         {
             try
             {
-                category = await dbRepository.AddAsync(category);
+                Tag = await dbRepository.AddAsync(Tag);
 
-                busClient.Publish(new CategoryCreated());
+                busClient.Publish(new TagCreated());
 
-                return category;
+                return Tag;
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.StackTrace);
-                throw new Exception($"Failed to create {nameof(Category)}", ex);
+                throw new Exception($"Failed to create {nameof(Tag)}", ex);
             }
         }
 
-        public async Task<bool> DeleteAsync(Category category)
+        public async Task<bool> DeleteAsync(Tag Tag)
         {
             try
             {
-                var result = await dbRepository.DeleteAsync(category);
-                busClient.Publish(new CategoryCreated());
+                var result = await dbRepository.DeleteAsync(Tag);
+                busClient.Publish(new TagCreated());
                 return result;
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.StackTrace);
-                throw new Exception($"Failed to Delete {nameof(Category)}", ex);
+                throw new Exception($"Failed to Delete {nameof(Tag)}", ex);
             }
         }
 
-        public async Task<IList<Category>> GetAllAsync()
+        public async Task<IList<Tag>> GetAllAsync()
         {
             try
             {
-                var data = await cache.GetAsync<IList<Category>>(CacheConstant.CATEGORY_KEY);
+                var data = await cache.GetAsync<IList<Tag>>(CacheConstant.TAG_KEY);
                 if (data == null)
                 {
                     data = await dbRepository.GetAllAsync();
-                    cache.SetAsync(CacheConstant.CATEGORY_KEY, data);
+                    cache.SetAsync(CacheConstant.TAG_KEY, data);
                 }
                 return data;
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.StackTrace);
-                throw new Exception($"Failed to Get All {nameof(Category)}", ex);
+                throw new Exception($"Failed to Get All {nameof(Tag)}", ex);
             }
         }
 
-        public async Task<Category> GetByIdAsync(int id)
+        public async Task<Tag> GetByIdAsync(int id)
         {
             try
             {
@@ -85,22 +85,22 @@ namespace Starglade.Service.Services
             catch (Exception ex)
             {
                 logger.LogError(ex.StackTrace);
-                throw new Exception($"Failed to Get {nameof(Category)}", ex);
+                throw new Exception($"Failed to Get {nameof(Tag)}", ex);
             }
         }
 
-        public async Task<int> UpdateAsync(Category category)
+        public async Task<int> UpdateAsync(Tag Tag)
         {
             try
             {
-                var result = await dbRepository.UpdateAsync(category);
-                busClient.Publish(new CategoryCreated());
+                var result = await dbRepository.UpdateAsync(Tag);
+                busClient.Publish(new TagCreated());
                 return result;
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.StackTrace);
-                throw new Exception($"Failed to Update {nameof(Category)}", ex);
+                throw new Exception($"Failed to Update {nameof(Tag)}", ex);
             }
         }
 

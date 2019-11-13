@@ -12,7 +12,7 @@ namespace Starglade.Core.Interfaces
 
         void DeRegister();
 
-        void Publish<T>(T data);
+        void Publish<T>(T data) where T : IMessage;
 
         void Subscribe(EventHandler<BasicDeliverEventArgs> callback);
 

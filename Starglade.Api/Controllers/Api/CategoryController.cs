@@ -27,8 +27,7 @@ namespace Starglade.Web.Controllers.Api
 
         [HttpGet("{id}",Name =nameof(Get))]
         public async Task<IActionResult> Get(int id)
-        {
-            var data = JsonSerializer.Deserialize<Category>(Encoding.UTF8.GetString(await cache.GetAsync("cs")));
+        {           
             var category = await categoryService.GetByIdAsync(id);
             return Ok(category);
 

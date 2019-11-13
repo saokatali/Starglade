@@ -7,6 +7,7 @@ using Starglade.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Starglade.Infrastructure.MessageBroker
@@ -14,12 +15,12 @@ namespace Starglade.Infrastructure.MessageBroker
     public class RabbitMQClient : IBusClient
     {
         AppSettings appSettings;
-        private  IConnection connection;
-        private  IModel channel;
+        private IConnection connection;
+        private IModel channel;
         ILogger logger;
-      
 
-        public RabbitMQClient(IOptionsMonitor<AppSettings> appSettings,ILogger<RabbitMQClient> logger)
+
+        public RabbitMQClient(IOptionsMonitor<AppSettings> appSettings, ILogger<RabbitMQClient> logger)
         {
             this.appSettings = appSettings.CurrentValue;
             this.logger = logger;
@@ -36,14 +37,14 @@ namespace Starglade.Infrastructure.MessageBroker
                 channel.QueueDeclare(appSettings.RabbitMQ.Queue, true, false, false);
                 channel.QueueBind(appSettings.RabbitMQ.Queue, appSettings.RabbitMQ.Exchange, appSettings.RabbitMQ.RoutingKey);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                logger.LogError(ex,ex.Message);
+                logger.LogError(ex, ex.Message);
             }
-                 
+
         }
 
-       
+
 
         public void DeRegister()
         {
@@ -60,20 +61,21 @@ namespace Starglade.Infrastructure.MessageBroker
 
         }
 
-        public void Publish<T>(T data)
+        public void Publish<T>(T data) where T : IMessage
         {
-            throw new NotImplementedException();
+
+            channel.BasicPublish(appSettings.RabbitMQ.Exchange, appSettings.RabbitMQ.RoutingKey, null, Encoding.UTF8.GetBytes(JsonSerializer.Serialize(data)));
         }
         public void Subscribe(EventHandler<BasicDeliverEventArgs> callback)
         {
-            
+
             var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += callback;
+     
 
-           
-
-            consumer.Received += callback; ;
+            channel.BasicConsume(appSettings.RabbitMQ.Queue, false, consumer);
         }
 
-       
+
     }
 }
