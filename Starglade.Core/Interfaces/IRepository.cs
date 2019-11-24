@@ -20,7 +20,7 @@ namespace Starglade.Core.Interfaces
         Task<T> AddAsync(T entity);
         Task<int> UpdateAsync(T entity);
 
-        Task<bool> DeleteAsync(T entity);
+        Task<int> DeleteAsync(T entity);
 
 
     }

@@ -14,7 +14,7 @@ namespace Starglade.Core.Interfaces
 
         Task<int> UpdateAsync(Category category );
 
-        Task<bool> DeleteAsync(Category category);
+        Task<int> DeleteAsync(Category category);
 
     }
 }

@@ -14,6 +14,6 @@ namespace Starglade.Core.Interfaces
 
         Task<int> UpdateAsync(Post Post);
 
-        Task<bool> DeleteAsync(Post Post);
+        Task<int> DeleteAsync(Post Post);
     }
 }

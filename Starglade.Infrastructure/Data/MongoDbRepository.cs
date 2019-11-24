@@ -25,7 +25,7 @@ namespace Starglade.Infrastructure.Data
             return entity;
         }
 
-        public Task<bool> DeleteAsync(T entity)
+        public Task<int> DeleteAsync(T entity)
         {
             throw new NotImplementedException();
         }

@@ -27,6 +27,7 @@ using Starglade.Infrastructure.Cache;
 using Starglade.Api.Extensions;
 using Starglade.Infrastructure.MessageBroker;
 using Starglade.Api.HostedServices;
+using Microsoft.OpenApi.Models;
 
 namespace Starglade.Web
 {
@@ -44,9 +45,9 @@ namespace Starglade.Web
         {
             services.AddOptions();
             services.Configure<AppSettings>(Configuration);
-            services.AddDbContext<StargladeDbContext>();
-            services.AddDbContext<SecurityDbContext>();
-            services.AddScoped(typeof(IDbRepository<>), typeof(DbContextRepository<>));
+            services.AddDbContext<StargladeDbContext>(ServiceLifetime.Singleton);
+            services.AddDbContext<SecurityDbContext>(ServiceLifetime.Scoped);
+            services.AddSingleton(typeof(IDbRepository<>), typeof(DbContextRepository<>));
             services.AddMongo();
             services.AddSingleton(typeof(IMongoDBRepository<>), typeof(MongoDbRepository<>));
             services.AddStackExchangeRedisCache(options =>
@@ -89,6 +90,11 @@ namespace Starglade.Web
             services.AddHostedService<RabbitMqListener>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog API", Version = "v1" });
+            });
         }
 
 
@@ -107,6 +113,13 @@ namespace Starglade.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "Blog API");
+            });
 
             app.UseRouting();
 

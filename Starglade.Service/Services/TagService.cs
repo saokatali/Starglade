@@ -42,7 +42,7 @@ namespace Starglade.Service.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(Tag Tag)
+        public async Task<int> DeleteAsync(Tag Tag)
         {
             try
             {

@@ -13,9 +13,9 @@ namespace Starglade.Infrastructure.Data
     public class StargladeDbContext:DbContext
     {
         AppSettings appSettings; 
-        public StargladeDbContext(IOptionsSnapshot<AppSettings> appSettings)
+        public StargladeDbContext(IOptionsMonitor<AppSettings> appSettings)
         {
-            this.appSettings = appSettings.Value;
+            this.appSettings = appSettings.CurrentValue;
 
         }
 

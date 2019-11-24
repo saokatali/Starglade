@@ -36,7 +36,7 @@ namespace Starglade.Service.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(Post Post)
+        public async Task<int> DeleteAsync(Post Post)
         {
             try
             {

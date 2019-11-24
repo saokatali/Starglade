@@ -12,6 +12,6 @@ namespace Starglade.Service.Services
 
         Task<int> UpdateAsync(Tag Tag);
 
-        Task<bool> DeleteAsync(Tag Tag);
+        Task<int> DeleteAsync(Tag Tag);
     }
 }

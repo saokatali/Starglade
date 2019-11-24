@@ -43,13 +43,11 @@ namespace Starglade.Infrastructure.Data
             return entity;
         }
 
-        public async Task<bool> DeleteAsync(T entity)
+        public async Task<int> DeleteAsync(T entity)
         {
             dbContext.Entry(entity).State = EntityState.Deleted;
-            int deletedRecord =  await dbContext.SaveChangesAsync();
-
-            return deletedRecord == 1 ? true : false;
-
+            return await dbContext.SaveChangesAsync();
+           
         }
 
         public async Task<int> UpdateAsync(T entity)

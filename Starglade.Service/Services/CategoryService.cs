@@ -42,7 +42,7 @@ namespace Starglade.Service.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(Category category)
+        public async Task<int> DeleteAsync(Category category)
         {
             try
             {
