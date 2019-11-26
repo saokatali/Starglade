@@ -3,8 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.UI", "Starglade.UI\Starglade.UI.csproj", "{0E77154B-B34C-4473-988A-64A3ED037330}"
-EndProject
+
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.Infrastructure", "Starglade.Infrastructure\Starglade.Infrastructure.csproj", "{2E91F976-C070-4242-8AD7-0088DC89976D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starglade.Core", "Starglade.Core\Starglade.Core.csproj", "{94A5C2B5-48AE-4104-A5D8-FB09C60139B6}"
