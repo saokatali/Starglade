@@ -1,6 +1,11 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Text.Json;
+using System.Reflection;
+using System.IO;
+
+
 
 namespace Starglade.Mobile
 {
@@ -9,9 +14,12 @@ namespace Starglade.Mobile
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            LoadAppSettings();
+            Container.RegisterServices();
+            MainPage = new NavigationPage(new MainPage());
         }
+
+        public AppSettings Settings { get; private set; }
 
         protected override void OnStart()
         {
@@ -26,6 +34,26 @@ namespace Starglade.Mobile
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private void LoadAppSettings()
+        {
+#if RELEASE
+            var appSettingsStream = Assembly.GetAssembly(typeof(AppSettings)).GetManifestResourceStream("Starglade.Mobile.appsettings.release.json");
+   
+#else
+            var appSettingsStream = Assembly.GetAssembly(typeof(AppSettings)).GetManifestResourceStream("Starglade.Mobile.appsettings.debug.json");
+#endif
+            using (var reader = new StreamReader(appSettingsStream))
+            {
+                string settings = reader.ReadToEnd();
+                Settings = JsonSerializer.Deserialize<AppSettings>(settings, new JsonSerializerOptions { PropertyNameCaseInsensitive=true});
+                
+            }
+
+
+
+
         }
     }
 }

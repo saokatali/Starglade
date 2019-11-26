@@ -7,12 +7,16 @@ using Microsoft.Extensions.Options;
 using System.Threading;
 using System.Threading.Tasks;
 using Starglade.Core.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace Starglade.Infrastructure.Data
 {
-    public class StargladeDbContext:DbContext
+    public class StargladeDbContext : DbContext
     {
-        AppSettings appSettings; 
+        AppSettings appSettings;
+
+        public static readonly ILoggerFactory DbLoggerFactory
+        = LoggerFactory.Create(builder => builder.AddConsole());
         public StargladeDbContext(IOptionsMonitor<AppSettings> appSettings)
         {
             this.appSettings = appSettings.CurrentValue;
@@ -24,7 +28,8 @@ namespace Starglade.Infrastructure.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(appSettings.ConnectionStrings.Db);
+            
+            optionsBuilder.UseLoggerFactory(DbLoggerFactory).UseSqlServer(appSettings.ConnectionStrings.Db);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -33,11 +38,11 @@ namespace Starglade.Infrastructure.Data
 
             foreach (var entity in ChangeTracker.Entries())
             {
-                if(entity.State == EntityState.Added || entity.State == EntityState.Deleted || entity.State == EntityState.Deleted)
+                if (entity.State == EntityState.Added || entity.State == EntityState.Deleted || entity.State == EntityState.Deleted)
                 {
                     (entity.Entity as StargladeEntity).LastUpdate = DateTime.UtcNow;
 
-                    if(entity.State == EntityState.Deleted)
+                    if (entity.State == EntityState.Deleted)
                     {
                         entity.State = EntityState.Modified;
                     }
@@ -53,7 +58,7 @@ namespace Starglade.Infrastructure.Data
         {
             modelBuilder.Entity<PostCategory>().HasKey(e => new { e.PostId, e.CategoryId });
             modelBuilder.Entity<PostTag>().HasKey(e => new { e.PostId, e.TagId });
-           // modelBuilder.Entity<StargladeEntity>().HasQueryFilter(e => !e.IsDeleted);
+            // modelBuilder.Entity<StargladeEntity>().HasQueryFilter(e => !e.IsDeleted);
             base.OnModelCreating(modelBuilder);
         }
 

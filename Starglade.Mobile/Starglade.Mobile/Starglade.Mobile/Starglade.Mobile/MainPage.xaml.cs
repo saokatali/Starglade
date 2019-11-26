@@ -16,6 +16,7 @@ namespace Starglade.Mobile
         public MainPage()
         {
             InitializeComponent();
+            DisplayAlert("info",(Application.Current as App).Settings.Services,"ok");
         }
     }
 }

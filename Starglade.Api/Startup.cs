@@ -94,6 +94,7 @@ namespace Starglade.Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog API", Version = "v1" });
+                
             });
         }
 
@@ -117,8 +118,10 @@ namespace Starglade.Web
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
-                c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "Blog API");
+                c.RoutePrefix = string.Empty;
+               // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog API");
+
             });
 
             app.UseRouting();

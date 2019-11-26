@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Starglade.Core.Entities
 {
@@ -23,6 +24,9 @@ namespace Starglade.Core.Entities
         public IList<PostCategory> Categories { get; set; }
 
         public IList<PostTag> Tags { get; set; }
+
+        [NotMapped]
+        public int TotalComments { get; set; }
 
     }
 }

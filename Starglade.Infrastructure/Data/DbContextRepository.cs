@@ -26,6 +26,11 @@ namespace Starglade.Infrastructure.Data
             return await dbContext.Set<T>().ToListAsync();
         }
 
+        public async Task<IList<TResult>> GetAllAsync<TResult>(Expression<Func<T,TResult>> selection)
+        {
+            return await dbContext.Set<T>().Select(selection).ToListAsync();
+        }
+
         public async Task<IList<T>> GetByConditionAsync(Expression<Func<T, bool>> condition)
         {
             return await dbContext.Set<T>().Where(condition).ToListAsync();

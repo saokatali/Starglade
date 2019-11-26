@@ -53,8 +53,8 @@ namespace Starglade.Service.Services
         {
             try
             {
-               
-                    return await dbRepository.GetAllAsync();
+
+                return await dbRepository.GetAllAsync(e => new Post { PostId=e.PostId, Title= e.Title, Content= e.Content, Tags= e.Tags, Categories=e.Categories, PublishedOn=e.PublishedOn, TotalComments= e.Comments.Count });
               
             }
             catch (Exception ex)
