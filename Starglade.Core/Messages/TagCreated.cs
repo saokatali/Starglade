@@ -2,7 +2,7 @@
 
 namespace Starglade.Core.Messages
 {
-    public class TagCreated:IEvent
+    public class TagCreated : IEvent
     {
         public TagCreated()
         {

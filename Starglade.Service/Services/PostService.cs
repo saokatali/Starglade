@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Starglade.Core.Entities;
 using Starglade.Core.Interfaces;
-using Starglade.Infrastructure.Data;
+using Starglade.Core.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Starglade.Service.Services
 {
-    public class PostService: IPostService
+    public class PostService : IPostService
     {
         IDbRepository<Post> dbRepository;
         private readonly ILogger<Category> logger;
@@ -26,7 +26,7 @@ namespace Starglade.Service.Services
             try
             {
                 Post = await dbRepository.AddAsync(Post);
-             
+
                 return Post;
             }
             catch (Exception ex)
@@ -49,13 +49,13 @@ namespace Starglade.Service.Services
             }
         }
 
-        public async Task<IList<Post>> GetAllAsync()
+        public async Task<IList<PostModel>> GetAllAsync()
         {
             try
             {
 
-                return await dbRepository.GetAllAsync(e => new Post { PostId=e.PostId, Title= e.Title, Content= e.Content, Tags= e.Tags, Categories=e.Categories, PublishedOn=e.PublishedOn, TotalComments= e.Comments.Count });
-              
+                return await dbRepository.GetAllAsync(e => new PostModel { PostId = e.PostId, Title = e.Title, Content = e.Content, Tags = e.Tags.Select(e=> new TagModel { TagId= e.TagId, Name= e.Tag.Name }), Categories = e.Categories.Select(e=> new CategoryModel { CategoryId=e.CategoryId, Name=e.Category.Name } ) , PublishedOn = e.PublishedOn, TotalComments = e.Comments.Count, LastUpdate = e.LastUpdate });
+
             }
             catch (Exception ex)
             {

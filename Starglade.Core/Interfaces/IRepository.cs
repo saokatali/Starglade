@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Starglade.Core.Interfaces
 {
@@ -13,7 +12,7 @@ namespace Starglade.Core.Interfaces
 
         Task<IList<T>> GetPagedListAsync(int pageNo, int records);
 
-        Task<IList<T>> GetByConditionAsync(Expression<Func<T,bool>> condition);
+        Task<IList<T>> GetByConditionAsync(Expression<Func<T, bool>> condition);
 
         Task<IList<T>> GetPagedListByConditionAsync(Expression<Func<T, bool>> condition, int pageNo, int records);
 

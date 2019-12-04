@@ -1,13 +1,9 @@
-﻿using Starglade.Core.Entities;
-using Starglade.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Starglade.Core.Interfaces;
 
 namespace Starglade.Core.Messages
 {
-    public class CategoryCreated:IEvent
+    public class CategoryCreated : IEvent
     {
-        
+
     }
 }

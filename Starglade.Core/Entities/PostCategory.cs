@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Starglade.Core.Entities
+﻿namespace Starglade.Core.Entities
 {
     public class PostCategory
     {

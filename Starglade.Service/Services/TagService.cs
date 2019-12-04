@@ -2,11 +2,10 @@
 using Starglade.Core.Constants;
 using Starglade.Core.Entities;
 using Starglade.Core.Interfaces;
+using Starglade.Core.Messages;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Starglade.Core.Messages;
 
 namespace Starglade.Service.Services
 {

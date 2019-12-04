@@ -5,10 +5,8 @@ using RabbitMQ.Client.Events;
 using Starglade.Core.Interfaces;
 using Starglade.Core.Models;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Starglade.Infrastructure.MessageBroker
 {
@@ -71,7 +69,7 @@ namespace Starglade.Infrastructure.MessageBroker
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += callback;
-     
+
 
             channel.BasicConsume(appSettings.RabbitMQ.Queue, false, consumer);
         }

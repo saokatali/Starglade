@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Starglade.Core.Entities
 {
-    public class Post:StargladeEntity
+    public class Post : StargladeEntity
     {
         public int PostId { get; set; }
 

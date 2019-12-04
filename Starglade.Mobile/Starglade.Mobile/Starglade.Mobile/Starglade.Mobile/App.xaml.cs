@@ -4,8 +4,7 @@ using Xamarin.Forms.Xaml;
 using System.Text.Json;
 using System.Reflection;
 using System.IO;
-
-
+using Starglade.Mobile.Pages;
 
 namespace Starglade.Mobile
 {

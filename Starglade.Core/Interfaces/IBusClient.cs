@@ -1,8 +1,5 @@
 ﻿using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Starglade.Core.Interfaces
 {
@@ -16,6 +13,6 @@ namespace Starglade.Core.Interfaces
 
         void Subscribe(EventHandler<BasicDeliverEventArgs> callback);
 
-        
+
     }
 }

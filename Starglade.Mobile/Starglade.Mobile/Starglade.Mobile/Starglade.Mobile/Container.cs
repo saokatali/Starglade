@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Starglade.Mobile.Services;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace Starglade.Mobile
@@ -10,9 +12,11 @@ namespace Starglade.Mobile
         public static IServiceProvider Services { get; private set; }
         public static void RegisterServices()
         {
-            IServiceCollection serviceDescriptors = new ServiceCollection();
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<HttpClient, StargladeHttpClient>();
+            serviceCollection.AddSingleton(typeof(PostService));
 
-            Services = serviceDescriptors.BuildServiceProvider();
+            Services = serviceCollection.BuildServiceProvider();
         }
     }
 }

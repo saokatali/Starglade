@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Starglade.Core.Entities
 {
-    public class Category: StargladeEntity
+    public class Category : StargladeEntity
     {
         public int CategoryId { get; set; }
 

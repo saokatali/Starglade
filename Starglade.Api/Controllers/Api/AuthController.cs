@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Starglade.Core.Identity;
 using Starglade.Core.Models;
 using Starglade.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Starglade.Web.Controllers.Api
 {
@@ -33,7 +33,7 @@ namespace Starglade.Web.Controllers.Api
         {
             if (ModelState.IsValid)
             {
-                
+
                 var result = await signInManager.PasswordSignInAsync(user.Email, user.Password, false, false);
                 if (result.Succeeded)
                 {

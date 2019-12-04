@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {StargladeMaterialModule} from './starglade-material.module';
 import { AppRoutingModule } from './app-routing.module';
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from '../components/app.component';
 import { HeaderComponent } from '../components/header/header.component';
@@ -14,6 +16,9 @@ import { BlogSummaryComponent } from '../components/blog-summary/blog-summary.co
 import { BlogDetailsComponent } from '../components/blog-details/blog-details.component';
 import { AboutComponent } from '../components/about/about.component';
 
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -31,7 +36,13 @@ import { AboutComponent } from '../components/about/about.component';
     BrowserModule,
     AppRoutingModule,
     StargladeMaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

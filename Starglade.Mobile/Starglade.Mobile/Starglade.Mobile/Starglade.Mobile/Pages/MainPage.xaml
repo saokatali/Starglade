@@ -4,13 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Starglade.Mobile.MainPage">
+             x:Class="Starglade.Mobile.Pages.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <Button Text="Blogs" Clicked="Blogs" />
+        <Button Text="About" Clicked="About" />
+        <Button Text="Login" Clicked="Login" />
     </StackLayout>
 
 </ContentPage>

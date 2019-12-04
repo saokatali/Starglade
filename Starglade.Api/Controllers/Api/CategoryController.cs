@@ -1,19 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Starglade.Core.Entities;
+using Starglade.Core.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
-using Starglade.Core.Entities;
-using Starglade.Core.Interfaces;
 
 namespace Starglade.Web.Controllers.Api
 {
-   
+
     public class CategoryController : StargladeController
     {
 
@@ -30,7 +27,7 @@ namespace Starglade.Web.Controllers.Api
         [ProducesResponseType(typeof(Category), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<Category>> Get(int id)
-        {           
+        {
             var category = await categoryService.GetByIdAsync(id);
             return Single<Category>(category);
         }
@@ -49,11 +46,11 @@ namespace Starglade.Web.Controllers.Api
         {
             var result = await categoryService.AddAsync(category);
             var json = JsonSerializer.Serialize(result);
-            await cache.SetAsync("cs",Encoding.UTF8.GetBytes(json));
+            await cache.SetAsync("cs", Encoding.UTF8.GetBytes(json));
 
-            return CreatedAtAction( nameof(Get), new { id = result.CategoryId }, result);
+            return CreatedAtAction(nameof(Get), new { id = result.CategoryId }, result);
 
         }
-        
+
     }
 }

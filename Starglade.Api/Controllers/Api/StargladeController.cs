@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Starglade.Web.Controllers.Api
 {
@@ -11,9 +6,9 @@ namespace Starglade.Web.Controllers.Api
     [ApiController]
     public class StargladeController : ControllerBase
     {
-        protected ActionResult<T> Single<T>(T obj )
+        protected ActionResult<T> Single<T>(T obj)
         {
-            if(obj != null)
+            if (obj != null)
             {
                 return Ok(obj);
 

@@ -1,9 +1,5 @@
-﻿using Starglade.Core.Entities;
-using Starglade.Core.Interfaces;
-using Starglade.Core.Models;
+﻿using Starglade.Core.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Starglade.Infrastructure.Log
 {
@@ -24,7 +20,7 @@ namespace Starglade.Infrastructure.Log
 
                 //await dbRepository.AddAsync(entry);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }

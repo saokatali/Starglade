@@ -3,13 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Starglade.Core.Identity;
 using Starglade.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Starglade.Infrastructure.Data
 {
-    public class SecurityDbContext:IdentityDbContext<ApplicationUser>
+    public class SecurityDbContext : IdentityDbContext<ApplicationUser>
     {
         AppSettings appSettings;
         public SecurityDbContext(IOptionsSnapshot<AppSettings> appSettings)

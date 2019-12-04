@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Starglade.Core.Interfaces;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using Starglade.Core.Entities;
+using Starglade.Core.Interfaces;
+using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Starglade.Web.Controllers.Api
 {

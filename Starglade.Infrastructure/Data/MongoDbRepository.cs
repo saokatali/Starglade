@@ -1,19 +1,18 @@
-﻿using Starglade.Core.Interfaces;
+﻿using Pluralize.NET.Core;
+using Starglade.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Pluralize.NET.Core;
 
 
 namespace Starglade.Infrastructure.Data
 {
     public class MongoDbRepository<T> : IMongoDBRepository<T> where T : class
     {
-        readonly MonoDBContext dbContext;
+        readonly MongoDBContext dbContext;
 
-        public MongoDbRepository(MonoDBContext dbContext)
+        public MongoDbRepository(MongoDBContext dbContext)
         {
             this.dbContext = dbContext;
         }

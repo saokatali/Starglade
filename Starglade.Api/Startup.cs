@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Starglade.Core.Models;
-using Starglade.Infrastructure.Data;
-using Starglade.Core.Interfaces;
-using Starglade.Web.Extensions;
-using Microsoft.Extensions.Logging;
-using Starglade.Infrastructure.Log;
-using Starglade.Web.Middlewares;
 using Microsoft.Extensions.Hosting;
-using Starglade.Core.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using Starglade.Infrastructure.Cache;
-using Starglade.Api.Extensions;
-using Starglade.Infrastructure.MessageBroker;
-using Starglade.Api.HostedServices;
 using Microsoft.OpenApi.Models;
+using Starglade.Api.HostedServices;
+using Starglade.Core.Identity;
+using Starglade.Core.Interfaces;
+using Starglade.Core.Models;
+using Starglade.Infrastructure.Cache;
+using Starglade.Infrastructure.Data;
+using Starglade.Infrastructure.Log;
+using Starglade.Infrastructure.MessageBroker;
+using Starglade.Web.Extensions;
+using Starglade.Web.Middlewares;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace Starglade.Web
 {
@@ -61,7 +55,7 @@ namespace Starglade.Web
             services.AddLogging(builder => builder.Services.AddSingleton<ILoggerProvider, MongoDBLoggerProvider>());
             services.AddSingleton<IBusClient, RabbitMQClient>();
             services.AddStargladeServices();
-            
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<SecurityDbContext>().AddDefaultTokenProviders();
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services.AddAuthentication(options =>
@@ -79,7 +73,7 @@ namespace Starglade.Web
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = false,
-                    ValidateAudience=false,                  
+                    ValidateAudience = false,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"])),
                     ClockSkew = TimeSpan.Zero
 
@@ -94,7 +88,7 @@ namespace Starglade.Web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog API", Version = "v1" });
-                
+
             });
         }
 
@@ -110,16 +104,16 @@ namespace Starglade.Web
             if (!env.IsDevelopment())
             {
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.RoutePrefix = string.Empty;
-               // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                // string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog API");
 
             });
@@ -136,7 +130,7 @@ namespace Starglade.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-         
+
 
 
         }

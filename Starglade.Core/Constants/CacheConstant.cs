@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Starglade.Core.Constants
+﻿namespace Starglade.Core.Constants
 {
     public static class CacheConstant
     {

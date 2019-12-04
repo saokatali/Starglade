@@ -1,11 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
+using Starglade.Infrastructure.Data;
+using Starglade.Service.Services;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using Starglade.Service.Services;
-using Starglade.Infrastructure.Data;
 
 namespace Starglade.Web.Extensions
 {
@@ -15,9 +12,9 @@ namespace Starglade.Web.Extensions
         {
             Assembly assembly = Assembly.GetAssembly(typeof(StargladeService));
 
-            foreach (var type in assembly.GetTypes().Where(e=>e.Name.EndsWith("Service") && !e.Name.StartsWith(nameof(StargladeService))))
+            foreach (var type in assembly.GetTypes().Where(e => e.Name.EndsWith("Service") && !e.Name.StartsWith(nameof(StargladeService))))
             {
-                var baseType = type.GetInterfaces().FirstOrDefault(e=>e.Name.EndsWith("Service"));
+                var baseType = type.GetInterfaces().FirstOrDefault(e => e.Name.EndsWith("Service"));
 
                 services.AddTransient(baseType, type);
 
@@ -29,7 +26,7 @@ namespace Starglade.Web.Extensions
 
         public static void AddMongo(this IServiceCollection services)
         {
-            services.AddSingleton(typeof(MonoDBContext));
+            services.AddSingleton(typeof(MongoDBContext));
         }
 
     }

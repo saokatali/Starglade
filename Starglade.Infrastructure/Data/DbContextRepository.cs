@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 using Starglade.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Starglade.Infrastructure.Data
 {
-    public class DbContextRepository<T> : IDbRepository<T> where T:class
+    public class DbContextRepository<T> : IDbRepository<T> where T : class
     {
         readonly StargladeDbContext dbContext;
 
@@ -19,14 +17,14 @@ namespace Starglade.Infrastructure.Data
             this.dbContext = dbContext;
         }
 
-      
+
 
         public async Task<IList<T>> GetAllAsync()
         {
             return await dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<IList<TResult>> GetAllAsync<TResult>(Expression<Func<T,TResult>> selection)
+        public async Task<IList<TResult>> GetAllAsync<TResult>(Expression<Func<T, TResult>> selection)
         {
             return await dbContext.Set<T>().Select(selection).ToListAsync();
         }
@@ -52,7 +50,7 @@ namespace Starglade.Infrastructure.Data
         {
             dbContext.Entry(entity).State = EntityState.Deleted;
             return await dbContext.SaveChangesAsync();
-           
+
         }
 
         public async Task<int> UpdateAsync(T entity)

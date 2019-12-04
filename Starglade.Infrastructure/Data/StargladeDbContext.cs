@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using Starglade.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Starglade.Core.Entities;
+using Starglade.Core.Models;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Starglade.Core.Entities;
-using Microsoft.Extensions.Logging;
 
 namespace Starglade.Infrastructure.Data
 {
@@ -15,8 +13,7 @@ namespace Starglade.Infrastructure.Data
     {
         AppSettings appSettings;
 
-        public static readonly ILoggerFactory DbLoggerFactory
-        = LoggerFactory.Create(builder => builder.AddConsole());
+        ILoggerFactory factory = LoggerFactory.Create(buider => buider.AddConsole());
         public StargladeDbContext(IOptionsMonitor<AppSettings> appSettings)
         {
             this.appSettings = appSettings.CurrentValue;
@@ -28,23 +25,33 @@ namespace Starglade.Infrastructure.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            
-            optionsBuilder.UseLoggerFactory(DbLoggerFactory).UseSqlServer(appSettings.ConnectionStrings.Db);
+
+#if DEBUG
+            optionsBuilder.UseLoggerFactory(factory);
+#endif
+
+            optionsBuilder.UseSqlServer(appSettings.ConnectionStrings.Db);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             ChangeTracker.DetectChanges();
 
-            foreach (var entity in ChangeTracker.Entries())
+            foreach (var entry in ChangeTracker.Entries())
             {
-                if (entity.State == EntityState.Added || entity.State == EntityState.Deleted || entity.State == EntityState.Deleted)
+                if (entry.State == EntityState.Added || entry.State == EntityState.Deleted || entry.State == EntityState.Deleted)
                 {
-                    (entity.Entity as StargladeEntity).LastUpdate = DateTime.UtcNow;
-
-                    if (entity.State == EntityState.Deleted)
+                    var entity = entry.Entity as StargladeEntity;
+                    if (entity != null)
                     {
-                        entity.State = EntityState.Modified;
+                        entity.LastUpdate = DateTime.UtcNow;
+
+
+                        if (entry.State == EntityState.Deleted)
+                        {
+                            entry.State = EntityState.Modified;
+                            entity.IsDeleted = true;
+                        }
                     }
 
                 }
@@ -59,6 +66,9 @@ namespace Starglade.Infrastructure.Data
             modelBuilder.Entity<PostCategory>().HasKey(e => new { e.PostId, e.CategoryId });
             modelBuilder.Entity<PostTag>().HasKey(e => new { e.PostId, e.TagId });
             // modelBuilder.Entity<StargladeEntity>().HasQueryFilter(e => !e.IsDeleted);
+
+
+
             base.OnModelCreating(modelBuilder);
         }
 

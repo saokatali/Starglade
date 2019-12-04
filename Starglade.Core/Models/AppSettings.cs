@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Starglade.Core.Models
+﻿namespace Starglade.Core.Models
 {
     public class AppSettings
     {
@@ -23,7 +19,7 @@ namespace Starglade.Core.Models
     {
         public string Db { get; set; }
 
-      
+
     }
 
     public class Logging

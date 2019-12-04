@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Starglade.Core.Entities
+﻿namespace Starglade.Core.Entities
 {
     public class PostTag
     {
@@ -12,6 +8,6 @@ namespace Starglade.Core.Entities
 
         public Post Post { get; set; }
 
-        public  Tag Tag { get; set; }
+        public Tag Tag { get; set; }
     }
 }

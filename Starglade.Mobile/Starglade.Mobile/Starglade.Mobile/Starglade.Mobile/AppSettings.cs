@@ -6,6 +6,6 @@ namespace Starglade.Mobile
 {
     public class AppSettings
     {
-        public string Services { get; set; } = string.Empty;
+        public string ApiUrl { get; set; } = string.Empty;
     }
 }

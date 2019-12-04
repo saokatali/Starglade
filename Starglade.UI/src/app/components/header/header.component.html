@@ -1,4 +1,7 @@
-<header>
-    <p> <a routerLink='/' > Welcome Saokat</a> </p>
+<header >
+    <p> 
+        <a *ngIf="isLoggedin" routerLink='/' > Welcome Saokat</a> 
+        <a *ngIf="!isLoggedin" routerLink='/login' >login</a> 
+    </p>
 </header>
 

@@ -1,5 +1,3 @@
-using System;
-
 namespace Starglade.Web.Models
 {
     public class ErrorViewModel

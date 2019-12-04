@@ -8,7 +8,8 @@ import { AboutComponent } from '../components/about/about.component';
 const routes: Routes = [
   {path: 'blog-list', component: BlogListComponent},
   {path: '',  pathMatch: 'full', redirectTo: 'blog-list'},
-  {path: 'about', component: AboutComponent}
+  {path: 'about', component: AboutComponent},
+  {path: 'login', component: AboutComponent}
 ];
 
 @NgModule({
