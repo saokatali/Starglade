@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Starglade.Mobile.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace Starglade.Mobile.Pages
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void Signin(object sender, EventArgs e)
+        {
+            BindingContext = new Signin { UserName=string.Empty, Password= string.Empty };
+
         }
     }
 }

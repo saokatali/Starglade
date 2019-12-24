@@ -26,5 +26,17 @@ namespace Starglade.Mobile.Extension
             return JsonSerializer.Deserialize<T>(data, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
+        public static async Task<TResult> PostDataAsync<TContent, TResult>(this HttpClient httpClient, string url, TContent content )
+        {
+            var requestData = JsonSerializer.Serialize(content);
+            var message = await httpClient.PostAsync(url, new StringContent(requestData));
+
+            var data = await message.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<TResult>(data, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
+
+
     }
 }

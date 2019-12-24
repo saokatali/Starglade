@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Net;
 
+
 namespace Starglade.Mobile.Services
 {
     public class PostService

@@ -12,11 +12,14 @@
                 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <StackLayout Orientation="Horizontal">
+                        <StackLayout Padding="5">
+                            <StackLayout>
+                               
                                 <Label Text="{Binding Title}" />
-                                <Label Text="{Binding PublishedOn}" />
-                                <Label Text="{Binding TotalComments}" />
+                                <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding PublishedOn, StringFormat='Published On {0:d MMM}'}" />
+                                <Label Text="{Binding TotalComments,  StringFormat='{0} comments'  }" />
+                                </StackLayout>
                             </StackLayout>
                            
                         </StackLayout>

@@ -5,6 +5,7 @@ using RabbitMQ.Client.Events;
 using Starglade.Core.Interfaces;
 using Starglade.Core.Models;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
@@ -29,7 +30,11 @@ namespace Starglade.Infrastructure.MessageBroker
 
             try
             {
-                connection = new ConnectionFactory().CreateConnection();
+                var cf = new ConnectionFactory();
+                cf.HostName = appSettings.RabbitMQ.Host;
+                cf.UserName = appSettings.RabbitMQ.User;
+                cf.Password = appSettings.RabbitMQ.Pass;
+                connection = cf.CreateConnection();
                 channel = connection.CreateModel();
                 channel.ExchangeDeclare(appSettings.RabbitMQ.Exchange, appSettings.RabbitMQ.ExchangeType, true, false);
                 channel.QueueDeclare(appSettings.RabbitMQ.Queue, true, false, false);

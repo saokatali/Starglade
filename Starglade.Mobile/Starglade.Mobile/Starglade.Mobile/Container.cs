@@ -13,6 +13,7 @@ namespace Starglade.Mobile
         public static void RegisterServices()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<HttpClientHandler, StargladeHttpClientHandler>();
             serviceCollection.AddSingleton<HttpClient, StargladeHttpClient>();
             serviceCollection.AddSingleton(typeof(PostService));
 

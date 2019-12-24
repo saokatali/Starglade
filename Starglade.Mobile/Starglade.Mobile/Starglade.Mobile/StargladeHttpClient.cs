@@ -8,10 +8,12 @@ namespace Starglade.Mobile
 {
     public class StargladeHttpClient:HttpClient
     {
-        public StargladeHttpClient()
+        public StargladeHttpClient(HttpClientHandler handler):base(handler)
         {
+            
             var app = Application.Current as App;
             BaseAddress = new Uri(app.Settings.ApiUrl);
+            DefaultRequestHeaders.Add("Accept", "application/json");
         }
     }
 }

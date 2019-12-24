@@ -32,7 +32,7 @@ namespace Starglade.Mobile.Pages
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var post = e.CurrentSelection.SingleOrDefault() as Post;
-            DisplayAlert(post.Title, post.Title, "Ok");
+            Navigation.PushAsync(new PostDetail(post));
         }
     }
 }

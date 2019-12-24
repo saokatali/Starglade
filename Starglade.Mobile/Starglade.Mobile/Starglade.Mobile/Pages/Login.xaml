@@ -8,12 +8,12 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Entry Placeholder="User" />
+            <Entry Placeholder="User" Text="{Binding UserName}" />
 
-            <Entry Placeholder="Password" />
+            <Entry Placeholder="Password" Text="{Binding Password}" />
 
 
-            <Button Text="Login" />
+            <Button Text="Login" Clicked="Signin" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -3,5 +3,6 @@
   <PropertyGroup>
     <SelectedDevice>pixel_2_oreo_8_0_api_26</SelectedDevice>
     <DefaultDevice>pixel_2_oreo_8_0_api_26</DefaultDevice>
+    <AndroidDesignerPreferredTheme>Theme.AppCompat.Light.NoActionBar</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

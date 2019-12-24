@@ -54,6 +54,7 @@ namespace Starglade.Service.Services
             try
             {
 
+
                 return await dbRepository.GetAllAsync(e => new PostModel { PostId = e.PostId, Title = e.Title, Content = e.Content, Tags = e.Tags.Select(e=> new TagModel { TagId= e.TagId, Name= e.Tag.Name }), Categories = e.Categories.Select(e=> new CategoryModel { CategoryId=e.CategoryId, Name=e.Category.Name } ) , PublishedOn = e.PublishedOn, TotalComments = e.Comments.Count, LastUpdate = e.LastUpdate });
 
             }
