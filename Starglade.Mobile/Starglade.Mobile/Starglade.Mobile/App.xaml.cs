@@ -38,10 +38,10 @@ namespace Starglade.Mobile
         private void LoadAppSettings()
         {
 #if RELEASE
-            var appSettingsStream = Assembly.GetAssembly(typeof(AppSettings)).GetManifestResourceStream("Starglade.Mobile.appsettings.release.json");
+            var appSettingsStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Starglade.Mobile.appsettings.release.json");
    
 #else
-            var appSettingsStream = Assembly.GetAssembly(typeof(AppSettings)).GetManifestResourceStream("Starglade.Mobile.appsettings.debug.json");
+            var appSettingsStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Starglade.Mobile.appsettings.debug.json");
 #endif
             using (var reader = new StreamReader(appSettingsStream))
             {
